@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemanth K Gowda | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--primary-bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        .blob {
+            position: fixed; width: 400px; height: 400px; background: var(--accent-color);
+            filter: blur(100px); border-radius: 50%; z-index: -1; opacity: 0.1;
+            animation: move 15s infinite alternate;
+        }
+        @keyframes move { from { transform: translate(-10%, -10%); } to { transform: translate(100%, 80%); } }
+
+        nav {
+            padding: 1.5rem 10%; display: flex; justify-content: space-between;
+            align-items: center; position: sticky; top: 0;
+            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); z-index: 100;
+        }
+        .logo { font-weight: 600; font-size: 1.5rem; color: var(--accent-color); cursor: pointer; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links li { cursor: pointer; transition: 0.3s; color: var(--text-dim); }
+        .nav-links li:hover, .nav-links li.active { color: var(--accent-color); }
+
+        .page { display: none; padding: 5rem 10%; min-height: 80vh; animation: fadeIn 0.5s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { font-size: 2.5rem; margin-bottom: 2rem; border-left: 5px solid var(--accent-color); padding-left: 15px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .card { 
+            background: var(--card-bg); 
+            padding: 2rem; 
+            border-radius: 15px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* About Section Specific Styles */
+        .about-container { display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
+        .about-image { width: 300px; height: 350px; border-radius: 20px; object-fit: cover; border: 2px solid var(--accent-color); box-shadow: 0 0 20px rgba(56, 189, 248, 0.2); }
+        .about-text { flex: 1; min-width: 300px; }
+        .internship-box { margin-top: 1.5rem; padding: 1.5rem; background: rgba(56, 189, 248, 0.05); border-radius: 12px; border-left: 4px solid var(--accent-color); }
+
+        .skill-container { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1rem 0; }
+        .skill-tag { background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.3rem 1rem; border-radius: 50px; border: 1px solid var(--accent-color); font-size: 0.8rem; }
+
+        .hero-content { text-align: center; margin-top: 10vh; }
+        .hero-content h1 { font-size: 4rem; }
+        
+        .contact-info { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: center; }
+        .contact-item { color: var(--text-dim); font-size: 1.1rem; text-decoration: none; transition: 0.3s; }
+        .contact-item:hover { color: var(--accent-color); }
+
+        .contact-form { display: flex; flex-direction: column; gap: 1.2rem; max-width: 600px; margin: 0 auto; }
+        .contact-form input, .contact-form textarea {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-color); }
+
+        .btn { display: inline-block; margin-top: 1.5rem; padding: 0.8rem 2rem; background: var(--accent-color); color: #000; text-decoration: none; border-radius: 8px; font-weight: 600; cursor: pointer; text-align: center; transition: 0.3s; border: none; }
+        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        footer { text-align: center; padding: 2rem; color: var(--text-dim); font-size: 0.9rem; }
+        p.desc { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+    <div class="blob"></div>
+
+    <nav>
+        <div class="logo" onclick="showPage('home')">Hemanth<span>.Dev</span></div>
+        <ul class="nav-links">
+            <li onclick="showPage('home')" id="link-home" class="active">Home</li>
+            <li onclick="showPage('about')" id="link-about">About</li>
+            <li onclick="showPage('education')" id="link-education">Education</li>
+            <li onclick="showPage('skills')" id="link-skills">Skills</li>
+            <li onclick="showPage('projects')" id="link-projects">Projects</li>
+            <li onclick="showPage('contact')" id="link-contact">Contact</li>
+        </ul>
+    </nav>
+
+    <section id="home" class="page active">
+        <div class="hero-content">
+            <h1>Hi, I'm <span style="color: var(--accent-color);">Hemanth K Gowda</span></h1>
+            <p style="font-size: 1.5rem; color: var(--text-dim);">BE Information Science | Passionate Developer</p>
+            <div class="contact-info">
+                <a href="mailto:hemanthkgowda2@gmail.com" class="contact-item">📧 hemanthkgowda2@gmail.com</a>
+                <a href="tel:+919019774118" class="contact-item">📞 +91 9019774118</a>
+            </div>
+            <div class="btn" onclick="showPage('about')">Know More About Me</div>
+        </div>
+    </section>
+
+    <section id="about" class="page">
+        <h2>About Me</h2>
+        <div class="about-container">
+            <img src="C:\Users\Hemanth.jpg" alt="Hemanth K Gowda" class="about-image">
+            <div class="about-text">
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    Motivated and detail-oriented engineering graduate seeking an entry-level role where I can apply strong programming fundamentals, analytical thinking, and problem-solving skills while contributing to enterprise IT, cloud, and infrastructure solutions.
+                </p>
+                <div class="internship-box">
+                    <h3 style="color: var(--accent-color); margin-bottom: 0.5rem;">Java Full Stack Intern</h3>
+                    <p><strong>Pentagon Space</strong></p>
+                    <p class="desc" style="margin-top: 0.5rem;">
+                        Acquired in-depth knowledge and hands-on experience with the basic concepts of <strong>Java Full Stack development</strong>, covering both frontend and backend technologies.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="page">
+        <h2>Education</h2>
+        <div class="grid">
+            <div class="card">
+                <h3 style="color: var(--accent-color);">Bachelor of Engineering (BE)</h3>
+                <p><strong>Adichunchanagiri University (ACU)</strong></p>
+                <p style="color: var(--text-dim);">Information Science | 2021 - 2025</p>
+                <p>Focused on <strong>Information Science</strong> and <strong>Software Engineering Fundamentals</strong>.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--accent-color);">Pre-University Course (PUC)</h3>
+                <p><strong>Excellent PU College, Moodubidire</strong></p>
+                <p style="color: var(--text-dim);">Science (PCMB) | 2019 - 2021</p>
+                <p>Completed higher secondary education with a score of <strong>82%</strong>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="page">
+        <h2>Technical Skills</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Frontend</h3>
+                <div class="skill-container">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Backend & Tools</h3>
+                <div class="skill-container">
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">SQL / MySQL</span>
+                    <span class="skill-tag">Git/GitHub</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="page">
+        <h2>Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <div>
+                    <h3 style="color: var(--accent-color);">Video Summarization</h3>
+                    <div class="skill-container"><span class="skill-tag">Object Detection</span><span class="skill-tag">JS</span><span class="skill-tag">SQL</span></div>
+                    <p class="desc">Condensing lengthy videos into concise representations using object detection methods.</p>
+                </div>
+                <div class="btn">View Source</div>
+            </div>
+            <div class="card">
+                <div>
+                    <h3 style="color: var(--accent-color);">Hostel Management System</h3>
+                    <div class="skill-container"><span class="skill-tag">PHP</span><span class="skill-tag">MySQL</span><span class="skill-tag">HTML5</span></div>
+                    <p class="desc">A managerial website for storing student and room information for college hostels.</p>
+                </div>
+                <div class="btn">View Source</div>
+            </div>
+            <div class="card">
+                <div>
+                    <h3 style="color: var(--accent-color);">Simple Quiz Engine</h3>
+                    <div class="skill-container"><span class="skill-tag">JAVA Logic</span><span class="skill-tag">JS</span><span class="skill-tag">SQL</span></div>
+                    <p class="desc">Logic-based application with real-time scoring algorithms.</p>
+                </div>
+                <div class="btn">View Source</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="page">
+        <h2>Get In Touch</h2>
+        <div class="grid">
+            <div class="card" style="text-align: center;">
+                <h3>Contact Details</h3>
+                <div class="contact-info" style="align-items: flex-start; margin: 0 auto;">
+                    <a href="mailto:hemanthkgowda2@gmail.com" class="contact-item">📧 hemanthkgowda2@gmail.com</a>
+                    <a href="tel:+919019774118" class="contact-item">📞 +91 9019774118</a>
+                    <p class="contact-item">📍 Karnataka, India</p>
+                </div>
+            </div>
+            <div class="card">
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 | Built by Hemanth K Gowda</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const links = document.querySelectorAll('.nav-links li');
+            links.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(pageId).classList.add('active');
+            document.getElementById('link-' + pageId).classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
